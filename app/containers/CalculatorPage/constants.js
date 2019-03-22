@@ -11,3 +11,4 @@
 
 export const COUNT_NUMBER = 'boilerplate/Home/COUNT_NUMBER';
 export const CALCULATE = 'boilerplate/Home/CALCULATE';
+export const CHANGE_EXPRESSIONS = 'boilerplate/Home/CHANGE_EXPRESSIONS';

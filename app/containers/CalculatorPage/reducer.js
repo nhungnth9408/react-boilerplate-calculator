@@ -11,12 +11,13 @@
  */
 import { fromJS } from 'immutable';
 
-import { COUNT_NUMBER, CALCULATE } from './constants';
+import { COUNT_NUMBER, CALCULATE, CHANGE_EXPRESSIONS } from './constants';
 
 // The initial state of the App
 export const initialState = fromJS({
   number: 13,
   result: 5,
+  expression: [],
 });
 
 function selectCalculator(state = initialState, action) {
@@ -25,6 +26,8 @@ function selectCalculator(state = initialState, action) {
       return state.set('number', state.get('number') + 1);
     case CALCULATE:
       return state.set('result', action.value);
+    case CHANGE_EXPRESSIONS:
+      return state.set('expression', fromJS(action.value));
     default:
       return state;
   }

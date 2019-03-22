@@ -11,4 +11,6 @@ const countNumber = () =>
   createSelector(selectCalculator, homeState => homeState.get('number'));
 const getResult = () =>
   createSelector(selectCalculator, homeState => homeState.get('result'));
-export { selectCalculator, getResult, countNumber };
+const selectExpression = () =>
+  createSelector(selectCalculator, homeState => homeState.get('expression'));
+export { selectCalculator, getResult, countNumber, selectExpression };

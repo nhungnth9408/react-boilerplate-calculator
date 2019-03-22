@@ -6,39 +6,33 @@ import { createStructuredSelector } from 'reselect';
 
 import injectReducer from 'utils/injectReducer';
 import './Calculator.css';
-// import injectSaga from 'utils/injectSaga';
-// import Button from 'components/Button';
-// import H2 from 'components/H2';
-// import ReposList from 'components/ReposList';
-// import Form from './Form';
-// import Input from './Input';
-import { count, evaluatePostFix } from './actions';
-import { countNumber, getResult } from './selectors';
+import { count, evaluatePostFix, changeExpression } from './actions';
+import { countNumber, getResult, selectExpression } from './selectors';
 import reducer from './reducer';
 export class Calculator extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      value: [],
-      result1: 0,
-    };
+    this.state = {};
     this.clickItem = this.clickItem.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    // console.log('result', nextProps.result);
-    if (nextProps) {
-      this.setState({
-        result1: nextProps.result,
-      });
-    }
-    console.log('result', nextProps.result);
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   // console.log('result', nextProps.result);
+  //   if (nextProps) {
+  //     this.setState({
+  //       value: nextProps.result,
+  //     });
+  //   }
+  //   console.log('result', nextProps.result);
+  // }
 
   clickItem(e) {
     const keyPress = e.target.innerText;
     // copy array
-    const newState = this.state.value.slice();
+    // const newState = this.state.value.slice();
+    const { onChangeExpression, expression } = this.props;
+    // convert imutable list to array
+    const newState = expression.toArray();
     switch (keyPress) {
       case '=':
         this.props.onCalculate(newState);
@@ -50,9 +44,10 @@ export class Calculator extends React.PureComponent {
         newState.push(keyPress);
         break;
     }
-    this.setState({
-      value: newState,
-    });
+    // this.setState({
+    //   value: newState,
+    // });
+    onChangeExpression(newState);
   }
 
   board = () =>
@@ -77,10 +72,10 @@ export class Calculator extends React.PureComponent {
       '.',
       '=',
       '+',
-    ].map((item, index) => (
+    ].map(item => (
       <button
         type="button"
-        key={index}
+        // key={index}
         className="item"
         onClick={this.clickItem}
       >
@@ -89,13 +84,15 @@ export class Calculator extends React.PureComponent {
     ));
 
   render() {
-    //result1 or result is true too
-    const { result } = this.props;
-    const { value, result1 } = this.state;
+    const { result, expression } = this.props;
     return (
       <div className="container">
         <input className="input" value={result} />
-        <input className="input" value={value.join('')} onChange={() => {}} />
+        <input
+          className="input"
+          value={expression.join('')}
+          onChange={() => {}}
+        />
         <div className="board">{this.board()}</div>
       </div>
     );
@@ -103,15 +100,18 @@ export class Calculator extends React.PureComponent {
 }
 // export default Calculator;
 Calculator.propTypes = {
+  expression: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   // onCount: PropTypes.func,
   onCalculate: PropTypes.func,
   // number: PropTypes.number,
   result: PropTypes.number,
+  onChangeExpression: PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
   return {
     // call action
+    onChangeExpression: exp => dispatch(changeExpression(exp)),
     onCount: () => dispatch(count()),
     onCalculate: value => dispatch(evaluatePostFix(value)),
   };
@@ -121,6 +121,7 @@ const mapStateToProps = createStructuredSelector({
   // call to selector
   number: countNumber(),
   result: getResult(),
+  expression: selectExpression(),
 });
 
 const withConnect = connect(

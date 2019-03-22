@@ -1,6 +1,11 @@
 module.exports = {
   collectCoverageFrom: [
-    'app/**/*.{js,jsx}',
+    // 'app/**/*.{js,jsx}',
+    'app/containers/CalculatorPage/*.{js,jsx}',
+    // 'app/containers/CalculatorPage/testcase.biz.{js,jsx}',
+    // 'app/containers/CalculatorPage/calculator.biz.{js,jsx}',
+    // 'app/containers/CalculatorPage/reducer.{js,jsx}',
+    // 'app/containers/CalculatorPage/actions.{js,jsx}',
     '!app/**/*.test.{js,jsx}',
     '!app/*/RbGenerated*/*.{js,jsx}',
     '!app/app.js',
@@ -23,6 +28,11 @@ module.exports = {
   },
   setupTestFrameworkScriptFile: '<rootDir>/internals/testing/test-bundler.js',
   setupFiles: ['raf/polyfill', '<rootDir>/internals/testing/enzyme-setup.js'],
-  testRegex: 'tests/.*\\.test\\.js$',
+  // testRegex: 'tests/.*\\.test\\.js$',
+  testRegex: 'app/containers/CalculatorPage/tests/.*\\.test\\.js$',
+  // testRegex:
+  //   'app/containers/CalculatorPage/tests/calculator\\.biz\\.test\\.js$',
+  // testRegex: 'app/containers/CalculatorPage/tests/actions\\.test\\.js$',
+  // testRegex: 'app/containers/CalculatorPage/tests/reducer\\.test\\.js$',
   snapshotSerializers: ['enzyme-to-json/serializer'],
 };

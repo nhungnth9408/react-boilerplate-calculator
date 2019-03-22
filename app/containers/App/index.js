@@ -8,9 +8,9 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { Switch, Route } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 
-import Calculator from 'containers/Calculator/Loadable';
+import Calculator from 'containers/CalculatorPage/Loadable';
 // import HomePage from 'containers/HomePage/Loadable';
 // import FeaturePage from 'containers/FeaturePage/Loadable';
 // import NotFoundPage from 'containers/NotFoundPage/Loadable';
@@ -38,15 +38,13 @@ export default function App() {
         <meta name="description" content="A React.js Boilerplate application" />
       </Helmet> */}
       {/* <Header /> */}
-      <Calculator/>
+      <Calculator />
       <Switch>
         {/* <Route exact path="/" component={Calculator} /> */}
         {/* <Route exact path="/" component={HomePage} /> */}
         {/* <Route path="/features" component={FeaturePage} /> */}
         {/* <Route path="" component={NotFoundPage} /> */}
       </Switch>
-      {/* <Footer />
-      <GlobalStyle /> */}
     </AppWrapper>
   );
 }
