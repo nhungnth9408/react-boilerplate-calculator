@@ -32,6 +32,7 @@ export class Calculator extends React.PureComponent {
     // const newState = this.state.value.slice();
     const { onChangeExpression, expression } = this.props;
     // convert imutable list to array
+    // console.log('Calculator expression: ', expression);
     const newState = expression.toArray();
     switch (keyPress) {
       case '=':
@@ -74,8 +75,9 @@ export class Calculator extends React.PureComponent {
       '+',
     ].map(item => (
       <button
+        name={item}
         type="button"
-        // key={index}
+        key={item}
         className="item"
         onClick={this.clickItem}
       >
