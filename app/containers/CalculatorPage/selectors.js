@@ -13,4 +13,12 @@ const getResult = () =>
   createSelector(selectCalculator, homeState => homeState.get('result'));
 const selectExpression = () =>
   createSelector(selectCalculator, homeState => homeState.get('expression'));
-export { selectCalculator, countNumber, getResult, selectExpression };
+const makeSelectUsername = () =>
+  createSelector(selectCalculator, homeState => homeState.get('username'));
+export {
+  selectCalculator,
+  countNumber,
+  getResult,
+  selectExpression,
+  makeSelectUsername,
+};

@@ -61,6 +61,16 @@ describe('<HomePage />', () => {
     expect(submitSpy).not.toHaveBeenCalled();
   });
 
+  // export function mapDispatchToProps(dispatch) {
+  //   return {
+  //     onChangeUsername: evt => dispatch(changeUsername(evt.target.value)),
+  //     onSubmitForm: evt => {
+  //       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
+  //       dispatch(loadRepos());
+  //     },
+  //     onCount: () => dispatch(count()),
+  //   };
+  // }
   describe('mapDispatchToProps', () => {
     describe('onChangeUsername', () => {
       it('should be injected', () => {

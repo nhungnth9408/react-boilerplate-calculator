@@ -15,7 +15,12 @@
  *    }
  */
 import caculatorResult from './calculator.biz';
-import { COUNT_NUMBER, CALCULATE, CHANGE_EXPRESSIONS } from './constants';
+import {
+  COUNT_NUMBER,
+  CALCULATE,
+  CHANGE_EXPRESSIONS,
+  CHANGE_USERNAME,
+} from './constants';
 
 /**
  * Changes the input field of the form
@@ -41,11 +46,18 @@ export function evaluatePostFix(value) {
 }
 /**
  *
- * @param {Array} exp
+ * @param  {Array} exp The new text of the input field
  */
 export function changeExpression(exp) {
   return {
     type: CHANGE_EXPRESSIONS,
     value: exp,
+  };
+}
+
+export function changeUsername(name) {
+  return {
+    type: CHANGE_USERNAME,
+    name,
   };
 }
