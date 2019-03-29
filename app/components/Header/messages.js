@@ -12,8 +12,24 @@ export default defineMessages({
     id: `${scope}.home`,
     defaultMessage: 'Home',
   },
+  calculator: {
+    id: `${scope}.calculator`,
+    defaultMessage: 'Calculator',
+  },
   features: {
     id: `${scope}.features`,
     defaultMessage: 'Features',
+  },
+  login: {
+    id: `${scope}.login`,
+    defaultMessage: 'Login',
+  },
+  menu: {
+    id: `${scope}.menu`,
+    defaultMessage: 'Menu',
+  },
+  table: {
+    id: `${scope}.table`,
+    defaultMessage: 'Table',
   },
 });

@@ -7,7 +7,8 @@ module.exports = {
     // 'app/containers/CalculatorPage/reducer.{js,jsx}',
     // 'app/containers/CalculatorPage/actions.{js,jsx}',
     // 'app/containers/CalculatorPage/selectors.{js,jsx}',
-    'app/containers/CalculatorPage/Calculator.{js,jsx}',
+    // 'app/containers/CalculatorPage/Calculator.{js,jsx}',
+    'app/containers/CalculatorPage/saga.{js,jsx}',
     '!app/**/*.test.{js,jsx}',
     '!app/*/RbGenerated*/*.{js,jsx}',
     '!app/app.js',
@@ -37,6 +38,7 @@ module.exports = {
   // testRegex: 'app/containers/CalculatorPage/tests/actions\\.test\\.js$',
   // testRegex: 'app/containers/CalculatorPage/tests/reducer\\.test\\.js$',
   // testRegex: 'app/containers/CalculatorPage/tests/selector\\.test\\.js$',
-  testRegex: 'app/containers/CalculatorPage/tests/dom\\.test\\.js$',
+  // testRegex: 'app/containers/CalculatorPage/tests/dom\\.test\\.js$',
+  testRegex: 'app/containers/CalculatorPage/tests/saga\\.test\\.js$',
   snapshotSerializers: ['enzyme-to-json/serializer'],
 };

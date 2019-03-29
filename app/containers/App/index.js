@@ -9,16 +9,15 @@
 import React from 'react';
 import styled from 'styled-components';
 // Route
-import { Switch } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import Calculator from 'containers/CalculatorPage/Loadable';
-// import HomePage from 'containers/HomePage/Loadable';
-// import FeaturePage from 'containers/FeaturePage/Loadable';
-// import NotFoundPage from 'containers/NotFoundPage/Loadable';
-// import Header from 'components/Header';
-// import Footer from 'components/Footer';
-
-// import GlobalStyle from '../../global-styles';
+import LoginPage from 'containers/LoginPage/Loadable';
+import HoverDemo from 'containers/HoverDemo/Loadable';
+import HomePage from 'containers/HomePage/Loadable';
+import FeaturePage from 'containers/FeaturePage/Loadable';
+import TableForm from 'containers/TableForm/Loadable';
+import Header from 'components/Header';
 
 const AppWrapper = styled.div`
   max-width: calc(768px + 16px * 2);
@@ -32,19 +31,14 @@ const AppWrapper = styled.div`
 export default function App() {
   return (
     <AppWrapper>
-      {/* <Helmet
-        titleTemplate="%s - React.js Boilerplate"
-        defaultTitle="React.js Boilerplate"
-      >
-        <meta name="description" content="A React.js Boilerplate application" />
-      </Helmet> */}
-      {/* <Header /> */}
-      <Calculator />
+      <Header />
       <Switch>
-        {/* <Route exact path="/" component={Calculator} /> */}
-        {/* <Route exact path="/" component={HomePage} /> */}
-        {/* <Route path="/features" component={FeaturePage} /> */}
-        {/* <Route path="" component={NotFoundPage} /> */}
+        <Route exact path="/" component={HomePage} />
+        <Route path="/calculator" component={Calculator} />
+        <Route path="/features" component={FeaturePage} />
+        <Route path="/login" component={LoginPage} />
+        <Route path="/menu" component={HoverDemo} />
+        <Route path="/table" component={TableForm} />
       </Switch>
     </AppWrapper>
   );
