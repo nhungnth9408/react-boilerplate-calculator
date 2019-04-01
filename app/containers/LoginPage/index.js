@@ -13,6 +13,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Redirect } from 'react-router-dom';
+import { Formik } from 'formik';
 
 const styles = theme => ({
   main: {
@@ -51,8 +52,8 @@ class SignIn extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      password: '',
-      email: '',
+      // password: '',
+      // email: '',
       redirect: false,
     };
     this.handleChangeEmail = this.handleChangeEmail.bind(this);
@@ -74,13 +75,13 @@ class SignIn extends React.PureComponent {
     return null;
   }
 
-  handleChangeEmail(event) {
-    this.setState({ email: event.target.value });
-  }
+  // handleChangeEmail(event) {
+  //   this.setState({ email: event.target.value });
+  // }
 
-  handleChangePassword(event) {
-    this.setState({ password: event.target.value });
-  }
+  // handleChangePassword(event) {
+  //   this.setState({ password: event.target.value });
+  // }
 
   handleSubmit() {
     this.setRedirect();
@@ -99,43 +100,88 @@ class SignIn extends React.PureComponent {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={classes.form} onSubmit={this.handleSubmit}>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="email">Email Address</InputLabel>
-              <Input
-                id="email"
-                name="email"
-                autoComplete="email"
-                autoFocus
-                value={this.state.email}
-                onChange={this.handleChangeEmail}
-              />
-            </FormControl>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="password">Password</InputLabel>
-              <Input
-                name="password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                value={this.state.password}
-                onChange={this.handleChangePassword}
-              />
-            </FormControl>
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-              Sign in
-            </Button>
-          </form>
+          <Formik
+            initialValues={{ email: '', password: '' }}
+            validate={values => {
+              const errors = {};
+              if (!values.email) {
+                errors.email = 'Required';
+              } else if (
+                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+              ) {
+                errors.email = 'Invalid email address';
+              }
+              return errors;
+            }}
+            onSubmit={(values, { setSubmitting }) => {
+              this.handleSubmit();
+              setSubmitting(false);
+            }}
+          >
+            {({
+              values,
+              errors,
+              touched,
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              isSubmitting,
+              /* and other goodies */
+            }) => (
+              <form
+                className={classes.form}
+                // onSubmit={this.handleSubmit}
+                onSubmit={handleSubmit}
+              >
+                <FormControl margin="normal" required fullWidth>
+                  <InputLabel htmlFor="email">Email Address</InputLabel>
+                  <Input
+                    id="email"
+                    name="email"
+                    autoComplete="email"
+                    autoFocus
+                    value={values.email}
+                    // To show(real time) warning message if format email is wrong
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    // value={this.state.email}
+                    // onChange={this.handleChangeEmail}
+                  />
+                  <p>{errors.email && touched.email && errors.email}</p>
+                </FormControl>
+                <FormControl margin="normal" required fullWidth>
+                  <InputLabel htmlFor="password">Password</InputLabel>
+                  <Input
+                    name="password"
+                    type="password"
+                    placeholder="Password"
+                    value={values.password}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    // value={this.state.password}
+                    // onChange={this.handleChangePassword}
+                  />
+                  <p>
+                    {errors.password && touched.password && errors.password}
+                  </p>
+                </FormControl>
+                <FormControlLabel
+                  control={<Checkbox value="remember" color="primary" />}
+                  label="Remember me"
+                />
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  // className={classes.submit}
+                  disabled={isSubmitting}
+                >
+                  Sign in
+                </Button>
+              </form>
+            )}
+          </Formik>
         </Paper>
       </main>
     );

@@ -24,6 +24,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import SendIcon from '@material-ui/icons/Send';
 import './menu.css';
+import ChildItem from './ChildItem';
 const styles = theme => ({
   menuItem: {
     '&:focus': {
@@ -46,13 +47,13 @@ const styles = theme => ({
 class MenuListComposition extends Component {
   state = {
     anchorEl: null,
-    idxValue: 0,
+    // idxValue: 0,
   };
 
   handlePopoverOpen = event => {
     this.setState({
       anchorEl: event.currentTarget,
-      idxValue: event.target.id,
+      // idxValue: event.target.id,
     });
   };
 
@@ -62,12 +63,13 @@ class MenuListComposition extends Component {
 
   table() {
     return (
-      <div>
-        <ul>
-          <li>{this.state.idxValue}</li>
-          <li>{this.state.idxValue}</li>
-        </ul>
-      </div>
+      // <div>
+      //   <ul>
+      //     <li>{this.state.idxValue}</li>
+      //     <li>{this.state.idxValue}</li>
+      //   </ul>
+      // </div>
+      <ChildItem />
     );
   }
 
